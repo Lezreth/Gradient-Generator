@@ -12,11 +12,15 @@ namespace Gradient_Maker
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmMain());
+
+            if (args.Length > 0)
+            { Application.Run(new FrmMain(args[0])); }
+            else
+            { Application.Run(new FrmMain()); }
         }
     }
 }

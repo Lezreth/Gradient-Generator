@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -42,9 +43,14 @@ namespace Gradient_Maker
         #endregion
         #region Constructor, Form Load, Form Closing
 
-        public FrmMain()
+        public FrmMain(string Filename = default)
         {
             InitializeComponent();
+
+            Show();
+
+            if (!string.IsNullOrEmpty(Filename))
+            { LoadColorList(Filename); }
         }
 
         private void FrmMain_Load(object sender, EventArgs e)
@@ -125,6 +131,95 @@ namespace Gradient_Maker
             return new Bitmap(bitmap);
         }
 
+        private static string FileLoadError => "Could not load the configuration.  The file might be in the wrong format.";
+
+        /// <summary>
+        /// Save the color list to a configuration file.
+        /// </summary>
+        /// <param name="Filename">Name of the file to save the list to.</param>
+        private void SaveConfiguration(string Filename)
+        {
+            StringBuilder builder = new StringBuilder();
+            _ = builder.AppendLine(NumWidth.Value.ToString());
+            _ = builder.AppendLine(NumHeight.Value.ToString());
+
+            foreach (ListViewItem item in LstColors.Items)
+            { _ = builder.AppendLine(item.Text); }
+
+            File.WriteAllText(Filename, builder.ToString());
+        }
+
+        /// <summary>
+        /// Load a color list from the specified file.
+        /// </summary>
+        /// <param name="Filename">Name of the file to load.</param>
+        private void LoadColorList(string Filename)
+        {
+            try
+            {
+                decimal OldWidth = NumWidth.Value;
+                decimal OldHeight = NumHeight.Value;
+
+                List<string> FileContents = new List<string>(File.ReadAllLines(Filename));
+                if (decimal.TryParse(FileContents[0], out decimal FWidth))
+                { NumWidth.Value = FWidth; }
+                else
+                {
+                    NumWidth.Value = OldWidth;
+                    _ = MessageBox.Show(FileLoadError);
+                    return;
+                }
+
+                if (decimal.TryParse(FileContents[1], out decimal FHeight))
+                { NumHeight.Value = FHeight; }
+                else
+                {
+                    NumWidth.Value = OldWidth;
+                    NumHeight.Value = OldHeight;
+                    _ = MessageBox.Show(FileLoadError);
+                    return;
+                }
+
+                FileContents.RemoveRange(0, 2);
+                LstColors.Items.Clear();
+                foreach (string item in FileContents)
+                {
+                    //  Traverse the remaining items in the list and parse them into color codes, then add them to the list view
+                    string[] Codes = item.Split(',');
+                    if (int.TryParse(Codes[0], out int A) && int.TryParse(Codes[1], out int R) && int.TryParse(Codes[2], out int G) && int.TryParse(Codes[3], out int B))
+                    { AddColor(Color.FromArgb(A, R, G, B)); }
+                    else
+                    {
+                        _ = MessageBox.Show(FileLoadError);
+                        return;
+                    }
+                }
+            }
+            catch (Exception)
+            { _ = MessageBox.Show(FileLoadError); }
+        }
+
+        /// <summary>
+        /// Add a new color to the list and optionally (re)generate the gradient.
+        /// </summary>
+        /// <param name="NColor">Color to add.</param>
+        private void AddColor(Color NColor)
+        {
+            //  Generate a unique ID for the color
+            string ID = KeyGenerator.GetKey().ToString();
+
+            //  Create an icon for the new color and associate the ID to it
+            ColorList.Images.Add(ID, new Bitmap(GetThumbnail(NColor, 32, 32)));
+
+            //  Create a list item and add it to the list along with the ID of the new icon
+            string ColorText = NColor.A + "," + NColor.R + "," + NColor.G + "," + NColor.B;
+            _ = LstColors.Items.Add(ColorText, ID);
+
+            //  If we have at least 2 colors in the list, generate a gradient
+            if (LstColors.Items.Count > 1 && ChkAutoGenerate.Checked)
+            { GetGradient(); }
+        }
+
         #endregion
         #region UI Event Handlers
 
@@ -135,19 +230,7 @@ namespace Gradient_Maker
 
         private void BtnAddColor_Click(object sender, EventArgs e)
         {
-            //  Generate a unique ID for the color
-            string ID = KeyGenerator.GetKey().ToString();
-
-            //  Create an icon for the new color and associate the ID to it
-            ColorList.Images.Add(ID, new Bitmap(GetThumbnail(ClrEdit.Color, 32, 32)));
-
-            //  Create a list item and add it to the list along with the ID of the new icon
-            string ColorText = ClrEdit.Color.A + "," + ClrEdit.Color.R + "," + ClrEdit.Color.G + "," + ClrEdit.Color.B;
-            _ = LstColors.Items.Add(ColorText, ID);
-
-            //  If we have at least 2 colors in the list, generate a gradient
-            if (LstColors.Items.Count > 1 && ChkAutoGenerate.Checked)
-            { GetGradient(); }
+            AddColor(ClrEdit.Color);
         }
 
         private void BtnRemoveColor_Click(object sender, EventArgs e)
@@ -183,7 +266,24 @@ namespace Gradient_Maker
             { Filter = "PNG Files (*.png)|*.png" };
 
             if (dialog.ShowDialog() == DialogResult.OK)
-            { PictPreview.Image.Save(dialog.FileName, ImageFormat.Png); }
+            {
+                PictPreview.Image.Save(dialog.FileName, ImageFormat.Png);
+
+                if (ChkSaveConfig.Checked)
+                {
+                    FileInfo info = new FileInfo(dialog.FileName);
+                    SaveConfiguration(info.FullName.Replace(info.Extension, ".ColorList"));
+                }
+            }
+        }
+
+        private void BtnLoad_Click(object sender, EventArgs e)
+        {
+            using OpenFileDialog dialog = new OpenFileDialog
+            { Filter = "Color List (*.ColorList)|*.ColorList" };
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            { LoadColorList(dialog.FileName); }
         }
 
         private void BtnMoveUp_Click(object sender, EventArgs e)

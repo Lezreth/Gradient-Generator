@@ -33,7 +33,6 @@
             this.BtnRemoveColor = new System.Windows.Forms.Button();
             this.BtnAddColor = new System.Windows.Forms.Button();
             this.BtnGenerateGradient = new System.Windows.Forms.Button();
-            this.ClrEdit = new Cyotek.Windows.Forms.ColorEditor();
             this.ClrWheel = new Cyotek.Windows.Forms.ColorWheel();
             this.BtnSave = new System.Windows.Forms.Button();
             this.LstColors = new System.Windows.Forms.ListView();
@@ -44,12 +43,17 @@
             this.NumHeight = new System.Windows.Forms.NumericUpDown();
             this.BtnMoveUp = new System.Windows.Forms.Button();
             this.BtnMoveDown = new System.Windows.Forms.Button();
-            this.ClrManager = new Cyotek.Windows.Forms.ColorEditorManager();
             this.BtnDuplicate = new System.Windows.Forms.Button();
+            this.ClrEdit = new Cyotek.Windows.Forms.ColorEditor();
             this.ChkAutoGenerate = new System.Windows.Forms.CheckBox();
+            this.ClrManager = new Cyotek.Windows.Forms.ColorEditorManager();
+            this.TableButtons = new System.Windows.Forms.TableLayoutPanel();
+            this.ChkSaveConfig = new System.Windows.Forms.CheckBox();
+            this.BtnLoad = new System.Windows.Forms.Button();
             this.TableMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumHeight)).BeginInit();
+            this.TableButtons.SuspendLayout();
             this.SuspendLayout();
             // 
             // TableMain
@@ -61,35 +65,27 @@
             this.TableMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.TableMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.TableMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.TableMain.Controls.Add(this.PictPreview, 0, 7);
-            this.TableMain.Controls.Add(this.BtnRemoveColor, 0, 3);
-            this.TableMain.Controls.Add(this.BtnAddColor, 0, 2);
-            this.TableMain.Controls.Add(this.BtnGenerateGradient, 0, 0);
+            this.TableMain.Controls.Add(this.PictPreview, 0, 3);
             this.TableMain.Controls.Add(this.ClrWheel, 2, 2);
-            this.TableMain.Controls.Add(this.BtnSave, 0, 1);
-            this.TableMain.Controls.Add(this.LstColors, 1, 0);
             this.TableMain.Controls.Add(this.PictColor, 2, 0);
             this.TableMain.Controls.Add(this.LblWidth, 4, 0);
             this.TableMain.Controls.Add(this.LblHeight, 4, 1);
             this.TableMain.Controls.Add(this.NumWidth, 5, 0);
             this.TableMain.Controls.Add(this.NumHeight, 5, 1);
-            this.TableMain.Controls.Add(this.BtnMoveUp, 0, 5);
-            this.TableMain.Controls.Add(this.BtnMoveDown, 0, 6);
-            this.TableMain.Controls.Add(this.BtnDuplicate, 0, 4);
             this.TableMain.Controls.Add(this.ClrEdit, 3, 2);
             this.TableMain.Controls.Add(this.ChkAutoGenerate, 3, 0);
+            this.TableMain.Controls.Add(this.LstColors, 0, 0);
+            this.TableMain.Controls.Add(this.TableButtons, 1, 0);
             this.TableMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TableMain.Location = new System.Drawing.Point(0, 0);
             this.TableMain.Name = "TableMain";
-            this.TableMain.RowCount = 8;
+            this.TableMain.RowCount = 4;
             this.TableMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.TableMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.TableMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.TableMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.TableMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.TableMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.TableMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 90F));
             this.TableMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.TableMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.TableMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.TableMain.Size = new System.Drawing.Size(1084, 561);
             this.TableMain.TabIndex = 0;
             // 
@@ -101,24 +97,24 @@
             this.PictPreview.Name = "PictPreview";
             this.PictPreview.Size = new System.Drawing.Size(1078, 251);
             this.PictPreview.SizeMode = Cyotek.Windows.Forms.ImageBoxSizeMode.Fit;
-            this.PictPreview.TabIndex = 6;
+            this.PictPreview.TabIndex = 9;
             // 
             // BtnRemoveColor
             // 
             this.BtnRemoveColor.Enabled = false;
-            this.BtnRemoveColor.Location = new System.Drawing.Point(3, 90);
+            this.BtnRemoveColor.Location = new System.Drawing.Point(3, 163);
             this.BtnRemoveColor.Name = "BtnRemoveColor";
-            this.BtnRemoveColor.Size = new System.Drawing.Size(100, 23);
-            this.BtnRemoveColor.TabIndex = 9;
+            this.BtnRemoveColor.Size = new System.Drawing.Size(110, 23);
+            this.BtnRemoveColor.TabIndex = 4;
             this.BtnRemoveColor.Text = "Remove Color";
             this.BtnRemoveColor.UseVisualStyleBackColor = true;
             this.BtnRemoveColor.Click += new System.EventHandler(this.BtnRemoveColor_Click);
             // 
             // BtnAddColor
             // 
-            this.BtnAddColor.Location = new System.Drawing.Point(3, 61);
+            this.BtnAddColor.Location = new System.Drawing.Point(3, 134);
             this.BtnAddColor.Name = "BtnAddColor";
-            this.BtnAddColor.Size = new System.Drawing.Size(100, 23);
+            this.BtnAddColor.Size = new System.Drawing.Size(110, 23);
             this.BtnAddColor.TabIndex = 3;
             this.BtnAddColor.Text = "Add Color";
             this.BtnAddColor.UseVisualStyleBackColor = true;
@@ -126,45 +122,32 @@
             // 
             // BtnGenerateGradient
             // 
-            this.BtnGenerateGradient.Location = new System.Drawing.Point(3, 3);
+            this.BtnGenerateGradient.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.BtnGenerateGradient.Location = new System.Drawing.Point(3, 94);
             this.BtnGenerateGradient.Name = "BtnGenerateGradient";
-            this.BtnGenerateGradient.Size = new System.Drawing.Size(100, 23);
-            this.BtnGenerateGradient.TabIndex = 1;
+            this.BtnGenerateGradient.Size = new System.Drawing.Size(110, 23);
+            this.BtnGenerateGradient.TabIndex = 2;
             this.BtnGenerateGradient.Text = "Generate";
             this.BtnGenerateGradient.UseVisualStyleBackColor = true;
             this.BtnGenerateGradient.Click += new System.EventHandler(this.BtnGenerateGradient_Click);
-            // 
-            // ClrEdit
-            // 
-            this.ClrEdit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TableMain.SetColumnSpan(this.ClrEdit, 3);
-            this.ClrEdit.Location = new System.Drawing.Point(516, 61);
-            this.ClrEdit.MinimumSize = new System.Drawing.Size(300, 240);
-            this.ClrEdit.Name = "ClrEdit";
-            this.TableMain.SetRowSpan(this.ClrEdit, 5);
-            this.ClrEdit.Size = new System.Drawing.Size(565, 240);
-            this.ClrEdit.TabIndex = 8;
-            this.ClrEdit.ColorChanged += new System.EventHandler(this.ClrEdit_ColorChanged);
             // 
             // ClrWheel
             // 
             this.ClrWheel.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.ClrWheel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ClrWheel.Location = new System.Drawing.Point(265, 61);
+            this.ClrWheel.Location = new System.Drawing.Point(292, 61);
             this.ClrWheel.MinimumSize = new System.Drawing.Size(240, 240);
             this.ClrWheel.Name = "ClrWheel";
-            this.TableMain.SetRowSpan(this.ClrWheel, 5);
             this.ClrWheel.Size = new System.Drawing.Size(245, 240);
-            this.ClrWheel.TabIndex = 13;
+            this.ClrWheel.TabIndex = 4;
             // 
             // BtnSave
             // 
             this.BtnSave.Location = new System.Drawing.Point(3, 32);
             this.BtnSave.Name = "BtnSave";
-            this.BtnSave.Size = new System.Drawing.Size(100, 23);
-            this.BtnSave.TabIndex = 14;
-            this.BtnSave.Text = "Save";
+            this.BtnSave.Size = new System.Drawing.Size(110, 23);
+            this.BtnSave.TabIndex = 0;
+            this.BtnSave.Text = "Save Gradient";
             this.BtnSave.UseVisualStyleBackColor = true;
             this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
@@ -173,12 +156,13 @@
             this.LstColors.AutoArrange = false;
             this.LstColors.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LstColors.HideSelection = false;
-            this.LstColors.Location = new System.Drawing.Point(109, 3);
+            this.LstColors.Location = new System.Drawing.Point(3, 3);
+            this.LstColors.MinimumSize = new System.Drawing.Size(160, 0);
             this.LstColors.Name = "LstColors";
-            this.TableMain.SetRowSpan(this.LstColors, 7);
+            this.TableMain.SetRowSpan(this.LstColors, 3);
             this.LstColors.ShowGroups = false;
-            this.LstColors.Size = new System.Drawing.Size(150, 298);
-            this.LstColors.TabIndex = 16;
+            this.LstColors.Size = new System.Drawing.Size(160, 298);
+            this.LstColors.TabIndex = 6;
             this.LstColors.UseCompatibleStateImageBehavior = false;
             this.LstColors.View = System.Windows.Forms.View.List;
             this.LstColors.SelectedIndexChanged += new System.EventHandler(this.LstColors_SelectedIndexChanged);
@@ -187,37 +171,37 @@
             // 
             this.PictColor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.PictColor.Location = new System.Drawing.Point(410, 3);
+            this.PictColor.Location = new System.Drawing.Point(437, 3);
             this.PictColor.Name = "PictColor";
             this.TableMain.SetRowSpan(this.PictColor, 2);
             this.PictColor.Size = new System.Drawing.Size(100, 52);
             this.PictColor.SizeMode = Cyotek.Windows.Forms.ImageBoxSizeMode.Fit;
-            this.PictColor.TabIndex = 15;
+            this.PictColor.TabIndex = 8;
             // 
             // LblWidth
             // 
             this.LblWidth.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.LblWidth.AutoSize = true;
-            this.LblWidth.Location = new System.Drawing.Point(885, 8);
+            this.LblWidth.Location = new System.Drawing.Point(885, 6);
             this.LblWidth.Name = "LblWidth";
             this.LblWidth.Size = new System.Drawing.Size(70, 13);
-            this.LblWidth.TabIndex = 4;
+            this.LblWidth.TabIndex = 2;
             this.LblWidth.Text = "Width (pixels)";
             // 
             // LblHeight
             // 
             this.LblHeight.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.LblHeight.AutoSize = true;
-            this.LblHeight.Location = new System.Drawing.Point(882, 37);
+            this.LblHeight.Location = new System.Drawing.Point(882, 35);
             this.LblHeight.Name = "LblHeight";
             this.LblHeight.Size = new System.Drawing.Size(73, 13);
-            this.LblHeight.TabIndex = 10;
+            this.LblHeight.TabIndex = 3;
             this.LblHeight.Text = "Height (pixels)";
             // 
             // NumWidth
             // 
             this.NumWidth.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.NumWidth.Location = new System.Drawing.Point(961, 4);
+            this.NumWidth.Location = new System.Drawing.Point(961, 3);
             this.NumWidth.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -230,7 +214,7 @@
             0});
             this.NumWidth.Name = "NumWidth";
             this.NumWidth.Size = new System.Drawing.Size(120, 20);
-            this.NumWidth.TabIndex = 5;
+            this.NumWidth.TabIndex = 0;
             this.NumWidth.Value = new decimal(new int[] {
             2000,
             0,
@@ -240,7 +224,7 @@
             // NumHeight
             // 
             this.NumHeight.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.NumHeight.Location = new System.Drawing.Point(961, 33);
+            this.NumHeight.Location = new System.Drawing.Point(961, 32);
             this.NumHeight.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -248,7 +232,7 @@
             0});
             this.NumHeight.Name = "NumHeight";
             this.NumHeight.Size = new System.Drawing.Size(120, 20);
-            this.NumHeight.TabIndex = 11;
+            this.NumHeight.TabIndex = 1;
             this.NumHeight.Value = new decimal(new int[] {
             100,
             0,
@@ -257,54 +241,119 @@
             // 
             // BtnMoveUp
             // 
-            this.BtnMoveUp.Location = new System.Drawing.Point(3, 187);
+            this.BtnMoveUp.Location = new System.Drawing.Point(3, 242);
             this.BtnMoveUp.Name = "BtnMoveUp";
-            this.BtnMoveUp.Size = new System.Drawing.Size(100, 23);
-            this.BtnMoveUp.TabIndex = 17;
+            this.BtnMoveUp.Size = new System.Drawing.Size(110, 23);
+            this.BtnMoveUp.TabIndex = 6;
             this.BtnMoveUp.Text = "Move Up";
             this.BtnMoveUp.UseVisualStyleBackColor = true;
             this.BtnMoveUp.Click += new System.EventHandler(this.BtnMoveUp_Click);
             // 
             // BtnMoveDown
             // 
-            this.BtnMoveDown.Location = new System.Drawing.Point(3, 217);
+            this.BtnMoveDown.Location = new System.Drawing.Point(3, 271);
             this.BtnMoveDown.Name = "BtnMoveDown";
-            this.BtnMoveDown.Size = new System.Drawing.Size(100, 23);
-            this.BtnMoveDown.TabIndex = 18;
+            this.BtnMoveDown.Size = new System.Drawing.Size(110, 23);
+            this.BtnMoveDown.TabIndex = 7;
             this.BtnMoveDown.Text = "Move Down";
             this.BtnMoveDown.UseVisualStyleBackColor = true;
             this.BtnMoveDown.Click += new System.EventHandler(this.BtnMoveDown_Click);
             // 
-            // ClrManager
-            // 
-            this.ClrManager.ColorEditor = this.ClrEdit;
-            this.ClrManager.ColorWheel = this.ClrWheel;
-            // 
             // BtnDuplicate
             // 
             this.BtnDuplicate.Enabled = false;
-            this.BtnDuplicate.Location = new System.Drawing.Point(3, 119);
+            this.BtnDuplicate.Location = new System.Drawing.Point(3, 192);
             this.BtnDuplicate.Name = "BtnDuplicate";
-            this.BtnDuplicate.Size = new System.Drawing.Size(100, 23);
-            this.BtnDuplicate.TabIndex = 19;
-            this.BtnDuplicate.Text = "Duplicate";
+            this.BtnDuplicate.Size = new System.Drawing.Size(110, 23);
+            this.BtnDuplicate.TabIndex = 5;
+            this.BtnDuplicate.Text = "Duplicate Selected";
             this.BtnDuplicate.UseVisualStyleBackColor = true;
             this.BtnDuplicate.Click += new System.EventHandler(this.BtnDuplicate_Click);
+            // 
+            // ClrEdit
+            // 
+            this.ClrEdit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TableMain.SetColumnSpan(this.ClrEdit, 3);
+            this.ClrEdit.Location = new System.Drawing.Point(543, 61);
+            this.ClrEdit.MinimumSize = new System.Drawing.Size(300, 240);
+            this.ClrEdit.Name = "ClrEdit";
+            this.ClrEdit.Size = new System.Drawing.Size(538, 240);
+            this.ClrEdit.TabIndex = 5;
+            this.ClrEdit.ColorChanged += new System.EventHandler(this.ClrEdit_ColorChanged);
             // 
             // ChkAutoGenerate
             // 
             this.ChkAutoGenerate.AutoSize = true;
             this.ChkAutoGenerate.Checked = true;
             this.ChkAutoGenerate.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ChkAutoGenerate.Location = new System.Drawing.Point(516, 3);
+            this.ChkAutoGenerate.Location = new System.Drawing.Point(543, 3);
             this.ChkAutoGenerate.Name = "ChkAutoGenerate";
             this.ChkAutoGenerate.Size = new System.Drawing.Size(178, 17);
-            this.ChkAutoGenerate.TabIndex = 20;
+            this.ChkAutoGenerate.TabIndex = 7;
             this.ChkAutoGenerate.Text = "Automatically Generate Gradient";
             this.ChkAutoGenerate.UseVisualStyleBackColor = true;
             // 
+            // ClrManager
+            // 
+            this.ClrManager.ColorEditor = this.ClrEdit;
+            this.ClrManager.ColorWheel = this.ClrWheel;
+            // 
+            // TableButtons
+            // 
+            this.TableButtons.ColumnCount = 1;
+            this.TableButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.TableButtons.Controls.Add(this.BtnMoveDown, 0, 8);
+            this.TableButtons.Controls.Add(this.BtnMoveUp, 0, 7);
+            this.TableButtons.Controls.Add(this.BtnDuplicate, 0, 6);
+            this.TableButtons.Controls.Add(this.BtnRemoveColor, 0, 5);
+            this.TableButtons.Controls.Add(this.BtnSave, 0, 1);
+            this.TableButtons.Controls.Add(this.ChkSaveConfig, 0, 2);
+            this.TableButtons.Controls.Add(this.BtnAddColor, 0, 4);
+            this.TableButtons.Controls.Add(this.BtnGenerateGradient, 0, 3);
+            this.TableButtons.Controls.Add(this.BtnLoad, 0, 0);
+            this.TableButtons.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TableButtons.Location = new System.Drawing.Point(169, 3);
+            this.TableButtons.Name = "TableButtons";
+            this.TableButtons.RowCount = 9;
+            this.TableMain.SetRowSpan(this.TableButtons, 3);
+            this.TableButtons.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.TableButtons.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.TableButtons.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.TableButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.TableButtons.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.TableButtons.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.TableButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.TableButtons.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.TableButtons.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.TableButtons.Size = new System.Drawing.Size(117, 298);
+            this.TableButtons.TabIndex = 10;
+            // 
+            // ChkSaveConfig
+            // 
+            this.ChkSaveConfig.AutoSize = true;
+            this.ChkSaveConfig.Checked = true;
+            this.ChkSaveConfig.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ChkSaveConfig.Location = new System.Drawing.Point(3, 61);
+            this.ChkSaveConfig.Name = "ChkSaveConfig";
+            this.ChkSaveConfig.Size = new System.Drawing.Size(93, 17);
+            this.ChkSaveConfig.TabIndex = 1;
+            this.ChkSaveConfig.Text = "Also Save List";
+            this.ChkSaveConfig.UseVisualStyleBackColor = true;
+            // 
+            // BtnLoad
+            // 
+            this.BtnLoad.Location = new System.Drawing.Point(3, 3);
+            this.BtnLoad.Name = "BtnLoad";
+            this.BtnLoad.Size = new System.Drawing.Size(110, 23);
+            this.BtnLoad.TabIndex = 8;
+            this.BtnLoad.Text = "Load List";
+            this.BtnLoad.UseVisualStyleBackColor = true;
+            this.BtnLoad.Click += new System.EventHandler(this.BtnLoad_Click);
+            // 
             // FrmMain
             // 
+            this.AcceptButton = this.BtnAddColor;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1084, 561);
@@ -318,6 +367,8 @@
             this.TableMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumHeight)).EndInit();
+            this.TableButtons.ResumeLayout(false);
+            this.TableButtons.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -343,6 +394,9 @@
         private System.Windows.Forms.Button BtnMoveDown;
         private System.Windows.Forms.Button BtnDuplicate;
         private System.Windows.Forms.CheckBox ChkAutoGenerate;
+        private System.Windows.Forms.TableLayoutPanel TableButtons;
+        private System.Windows.Forms.CheckBox ChkSaveConfig;
+        private System.Windows.Forms.Button BtnLoad;
     }
 }
 
