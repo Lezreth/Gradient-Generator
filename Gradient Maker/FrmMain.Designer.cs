@@ -35,18 +35,19 @@
             this.BtnRemoveColor = new System.Windows.Forms.Button();
             this.BtnAddColor = new System.Windows.Forms.Button();
             this.BtnGenerateGradient = new System.Windows.Forms.Button();
-            this.LstColors = new System.Windows.Forms.ListBox();
             this.LblHeight = new System.Windows.Forms.Label();
             this.NumHeight = new System.Windows.Forms.NumericUpDown();
-            this.PictColor = new System.Windows.Forms.PictureBox();
             this.ClrEdit = new Cyotek.Windows.Forms.ColorEditor();
             this.ClrWheel = new Cyotek.Windows.Forms.ColorWheel();
-            this.ClrManager = new Cyotek.Windows.Forms.ColorEditorManager();
             this.BtnSave = new System.Windows.Forms.Button();
+            this.ClrManager = new Cyotek.Windows.Forms.ColorEditorManager();
+            this.PictColor = new Cyotek.Windows.Forms.ImageBox();
+            this.LstColors = new System.Windows.Forms.ListView();
+            this.BtnMoveUp = new System.Windows.Forms.Button();
+            this.BtnMoveDown = new System.Windows.Forms.Button();
             this.TableMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumHeight)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PictColor)).BeginInit();
             this.SuspendLayout();
             // 
             // TableMain
@@ -57,27 +58,31 @@
             this.TableMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.TableMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.TableMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.TableMain.Controls.Add(this.LblWidth, 2, 0);
-            this.TableMain.Controls.Add(this.NumWidth, 3, 0);
-            this.TableMain.Controls.Add(this.PictPreview, 0, 4);
+            this.TableMain.Controls.Add(this.PictPreview, 0, 6);
             this.TableMain.Controls.Add(this.BtnRemoveColor, 0, 3);
             this.TableMain.Controls.Add(this.BtnAddColor, 0, 2);
             this.TableMain.Controls.Add(this.BtnGenerateGradient, 0, 0);
-            this.TableMain.Controls.Add(this.LstColors, 1, 0);
-            this.TableMain.Controls.Add(this.LblHeight, 2, 1);
-            this.TableMain.Controls.Add(this.NumHeight, 3, 1);
-            this.TableMain.Controls.Add(this.PictColor, 4, 0);
             this.TableMain.Controls.Add(this.ClrEdit, 3, 2);
             this.TableMain.Controls.Add(this.ClrWheel, 2, 2);
             this.TableMain.Controls.Add(this.BtnSave, 0, 1);
+            this.TableMain.Controls.Add(this.LstColors, 1, 0);
+            this.TableMain.Controls.Add(this.PictColor, 2, 0);
+            this.TableMain.Controls.Add(this.LblWidth, 3, 0);
+            this.TableMain.Controls.Add(this.LblHeight, 3, 1);
+            this.TableMain.Controls.Add(this.NumWidth, 4, 0);
+            this.TableMain.Controls.Add(this.NumHeight, 4, 1);
+            this.TableMain.Controls.Add(this.BtnMoveUp, 0, 4);
+            this.TableMain.Controls.Add(this.BtnMoveDown, 0, 5);
             this.TableMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TableMain.Location = new System.Drawing.Point(0, 0);
             this.TableMain.Name = "TableMain";
-            this.TableMain.RowCount = 5;
+            this.TableMain.RowCount = 7;
             this.TableMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.TableMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.TableMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.TableMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.TableMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.TableMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 120F));
             this.TableMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.TableMain.Size = new System.Drawing.Size(1084, 561);
             this.TableMain.TabIndex = 0;
@@ -86,7 +91,7 @@
             // 
             this.LblWidth.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.LblWidth.AutoSize = true;
-            this.LblWidth.Location = new System.Drawing.Point(410, 8);
+            this.LblWidth.Location = new System.Drawing.Point(885, 8);
             this.LblWidth.Name = "LblWidth";
             this.LblWidth.Size = new System.Drawing.Size(70, 13);
             this.LblWidth.TabIndex = 4;
@@ -95,7 +100,7 @@
             // NumWidth
             // 
             this.NumWidth.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.NumWidth.Location = new System.Drawing.Point(486, 4);
+            this.NumWidth.Location = new System.Drawing.Point(961, 4);
             this.NumWidth.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -119,15 +124,15 @@
             // 
             this.TableMain.SetColumnSpan(this.PictPreview, 5);
             this.PictPreview.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PictPreview.Location = new System.Drawing.Point(3, 308);
+            this.PictPreview.Location = new System.Drawing.Point(3, 307);
             this.PictPreview.Name = "PictPreview";
-            this.PictPreview.Size = new System.Drawing.Size(1078, 250);
+            this.PictPreview.Size = new System.Drawing.Size(1078, 251);
             this.PictPreview.SizeMode = Cyotek.Windows.Forms.ImageBoxSizeMode.Fit;
             this.PictPreview.TabIndex = 6;
             // 
             // BtnRemoveColor
             // 
-            this.BtnRemoveColor.Location = new System.Drawing.Point(3, 91);
+            this.BtnRemoveColor.Location = new System.Drawing.Point(3, 90);
             this.BtnRemoveColor.Name = "BtnRemoveColor";
             this.BtnRemoveColor.Size = new System.Drawing.Size(100, 23);
             this.BtnRemoveColor.TabIndex = 9;
@@ -137,7 +142,7 @@
             // 
             // BtnAddColor
             // 
-            this.BtnAddColor.Location = new System.Drawing.Point(3, 62);
+            this.BtnAddColor.Location = new System.Drawing.Point(3, 61);
             this.BtnAddColor.Name = "BtnAddColor";
             this.BtnAddColor.Size = new System.Drawing.Size(100, 23);
             this.BtnAddColor.TabIndex = 3;
@@ -155,22 +160,11 @@
             this.BtnGenerateGradient.UseVisualStyleBackColor = true;
             this.BtnGenerateGradient.Click += new System.EventHandler(this.BtnGenerateGradient_Click);
             // 
-            // LstColors
-            // 
-            this.LstColors.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LstColors.FormattingEnabled = true;
-            this.LstColors.IntegralHeight = false;
-            this.LstColors.Location = new System.Drawing.Point(109, 3);
-            this.LstColors.Name = "LstColors";
-            this.TableMain.SetRowSpan(this.LstColors, 4);
-            this.LstColors.Size = new System.Drawing.Size(120, 299);
-            this.LstColors.TabIndex = 0;
-            // 
             // LblHeight
             // 
             this.LblHeight.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.LblHeight.AutoSize = true;
-            this.LblHeight.Location = new System.Drawing.Point(407, 37);
+            this.LblHeight.Location = new System.Drawing.Point(882, 37);
             this.LblHeight.Name = "LblHeight";
             this.LblHeight.Size = new System.Drawing.Size(73, 13);
             this.LblHeight.TabIndex = 10;
@@ -179,7 +173,7 @@
             // NumHeight
             // 
             this.NumHeight.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.NumHeight.Location = new System.Drawing.Point(486, 34);
+            this.NumHeight.Location = new System.Drawing.Point(961, 33);
             this.NumHeight.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -194,27 +188,16 @@
             0,
             0});
             // 
-            // PictColor
-            // 
-            this.PictColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.PictColor.Location = new System.Drawing.Point(931, 3);
-            this.PictColor.Name = "PictColor";
-            this.TableMain.SetRowSpan(this.PictColor, 2);
-            this.PictColor.Size = new System.Drawing.Size(150, 53);
-            this.PictColor.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PictColor.TabIndex = 12;
-            this.PictColor.TabStop = false;
-            // 
             // ClrEdit
             // 
             this.ClrEdit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TableMain.SetColumnSpan(this.ClrEdit, 2);
-            this.ClrEdit.Location = new System.Drawing.Point(486, 62);
+            this.ClrEdit.Location = new System.Drawing.Point(516, 61);
             this.ClrEdit.MinimumSize = new System.Drawing.Size(300, 240);
             this.ClrEdit.Name = "ClrEdit";
-            this.TableMain.SetRowSpan(this.ClrEdit, 2);
-            this.ClrEdit.Size = new System.Drawing.Size(595, 240);
+            this.TableMain.SetRowSpan(this.ClrEdit, 4);
+            this.ClrEdit.Size = new System.Drawing.Size(565, 240);
             this.ClrEdit.TabIndex = 8;
             this.ClrEdit.ColorChanged += new System.EventHandler(this.ClrEdit_ColorChanged);
             // 
@@ -222,17 +205,12 @@
             // 
             this.ClrWheel.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.ClrWheel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ClrWheel.Location = new System.Drawing.Point(235, 62);
+            this.ClrWheel.Location = new System.Drawing.Point(265, 61);
             this.ClrWheel.MinimumSize = new System.Drawing.Size(240, 240);
             this.ClrWheel.Name = "ClrWheel";
-            this.TableMain.SetRowSpan(this.ClrWheel, 2);
+            this.TableMain.SetRowSpan(this.ClrWheel, 4);
             this.ClrWheel.Size = new System.Drawing.Size(245, 240);
             this.ClrWheel.TabIndex = 13;
-            // 
-            // ClrManager
-            // 
-            this.ClrManager.ColorEditor = this.ClrEdit;
-            this.ClrManager.ColorWheel = this.ClrWheel;
             // 
             // BtnSave
             // 
@@ -243,6 +221,56 @@
             this.BtnSave.Text = "Save";
             this.BtnSave.UseVisualStyleBackColor = true;
             this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
+            // 
+            // ClrManager
+            // 
+            this.ClrManager.ColorEditor = this.ClrEdit;
+            this.ClrManager.ColorWheel = this.ClrWheel;
+            // 
+            // PictColor
+            // 
+            this.PictColor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.PictColor.Location = new System.Drawing.Point(410, 3);
+            this.PictColor.Name = "PictColor";
+            this.TableMain.SetRowSpan(this.PictColor, 2);
+            this.PictColor.Size = new System.Drawing.Size(100, 52);
+            this.PictColor.SizeMode = Cyotek.Windows.Forms.ImageBoxSizeMode.Fit;
+            this.PictColor.TabIndex = 15;
+            // 
+            // LstColors
+            // 
+            this.LstColors.AutoArrange = false;
+            this.LstColors.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LstColors.HideSelection = false;
+            this.LstColors.Location = new System.Drawing.Point(109, 3);
+            this.LstColors.Name = "LstColors";
+            this.TableMain.SetRowSpan(this.LstColors, 6);
+            this.LstColors.ShowGroups = false;
+            this.LstColors.Size = new System.Drawing.Size(150, 298);
+            this.LstColors.TabIndex = 16;
+            this.LstColors.UseCompatibleStateImageBehavior = false;
+            this.LstColors.View = System.Windows.Forms.View.List;
+            // 
+            // BtnMoveUp
+            // 
+            this.BtnMoveUp.Location = new System.Drawing.Point(3, 157);
+            this.BtnMoveUp.Name = "BtnMoveUp";
+            this.BtnMoveUp.Size = new System.Drawing.Size(100, 23);
+            this.BtnMoveUp.TabIndex = 17;
+            this.BtnMoveUp.Text = "Move Up";
+            this.BtnMoveUp.UseVisualStyleBackColor = true;
+            this.BtnMoveUp.Click += new System.EventHandler(this.BtnMoveUp_Click);
+            // 
+            // BtnMoveDown
+            // 
+            this.BtnMoveDown.Location = new System.Drawing.Point(3, 187);
+            this.BtnMoveDown.Name = "BtnMoveDown";
+            this.BtnMoveDown.Size = new System.Drawing.Size(100, 23);
+            this.BtnMoveDown.TabIndex = 18;
+            this.BtnMoveDown.Text = "Move Down";
+            this.BtnMoveDown.UseVisualStyleBackColor = true;
+            this.BtnMoveDown.Click += new System.EventHandler(this.BtnMoveDown_Click);
             // 
             // FrmMain
             // 
@@ -258,7 +286,6 @@
             this.TableMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumHeight)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PictColor)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -266,7 +293,6 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel TableMain;
-        private System.Windows.Forms.ListBox LstColors;
         private System.Windows.Forms.Button BtnGenerateGradient;
         private System.Windows.Forms.Button BtnAddColor;
         private System.Windows.Forms.Label LblWidth;
@@ -277,9 +303,12 @@
         private Cyotek.Windows.Forms.ColorEditorManager ClrManager;
         private System.Windows.Forms.Label LblHeight;
         private System.Windows.Forms.NumericUpDown NumHeight;
-        private System.Windows.Forms.PictureBox PictColor;
         private Cyotek.Windows.Forms.ColorWheel ClrWheel;
         private System.Windows.Forms.Button BtnSave;
+        private Cyotek.Windows.Forms.ImageBox PictColor;
+        private System.Windows.Forms.ListView LstColors;
+        private System.Windows.Forms.Button BtnMoveUp;
+        private System.Windows.Forms.Button BtnMoveDown;
     }
 }
 
