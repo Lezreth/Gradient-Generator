@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -41,6 +38,14 @@ namespace Gradient_Maker
         private enum MoveDirection { Up = -1, Down = 1 };
 
         #endregion
+        #region Constants
+
+        /// <summary>
+        /// Error message for when a file cannot be loaded.
+        /// </summary>
+        private static string FileLoadError => "Could not load the configuration.  The file might be in the wrong format.";
+
+        #endregion
         #region Constructor, Form Load, Form Closing
 
         public FrmMain(string Filename = default)
@@ -58,6 +63,9 @@ namespace Gradient_Maker
             ClrEdit.Color = Color.FromArgb(255, 225, 50, 50);
             ClrEdit_ColorChanged(sender, e);
             LstColors.SmallImageList = ColorList;
+
+            LstGradientType.Items.AddRange(Enum.GetNames(typeof(GradientGenerator.GradientType)));
+            LstGradientType.SelectedIndex = 0;
         }
 
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -108,7 +116,10 @@ namespace Gradient_Maker
                 Colors.Add(Color.FromArgb(int.Parse(Codes[0]), int.Parse(Codes[1]), int.Parse(Codes[2]), int.Parse(Codes[3])));
             }
 
-            Task task = Task.Run(() => GradientGenerator.GradientBitmap(Colors, (int)NumWidth.Value, (int)NumHeight.Value, TokenSource.Token), TokenSource.Token)
+            _ = Enum.TryParse(LstGradientType.Text, out GradientGenerator.GradientType GType);
+
+            Task task = Task.Run(() => GradientGenerator.GradientBitmap(Colors, (int)NumWidth.Value, (int)NumHeight.Value,
+                GType, TokenSource.Token), TokenSource.Token)
                 .ContinueWith((prev) => { if (prev.Result != null) { PictPreview.Image = new Bitmap(prev.Result); } });
             await Task.WhenAll(task);
         }
@@ -130,8 +141,6 @@ namespace Gradient_Maker
 
             return new Bitmap(bitmap);
         }
-
-        private static string FileLoadError => "Could not load the configuration.  The file might be in the wrong format.";
 
         /// <summary>
         /// Save the color list to a configuration file.

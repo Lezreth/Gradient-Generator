@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Gradient_Maker
 {
-    public class GradientGenerator
+    public static class GradientGenerator
     {
+
+        public enum GradientType { Linear, Radial/*, Angle*/, Reflected, Diamond }
+
         /// <summary>
         /// Generate a color gradient transitioning from the first color to the second.
         /// </summary>
@@ -47,7 +47,7 @@ namespace Gradient_Maker
         /// <param name="Colors"></param>
         /// <param name="Token"></param>
         /// <returns></returns>
-        public static Bitmap GradientBitmap(List<Color> Colors, int Width, int Height, CancellationToken Token)
+        public static Bitmap GradientBitmap(List<Color> Colors, int Width, int Height, GradientType Shape, CancellationToken Token)
         {
             if (Colors is null) { return null; }
 
@@ -66,12 +66,60 @@ namespace Gradient_Maker
             using Graphics graphics = Graphics.FromImage(bitmap);
 
             //  Create a linear gradient from the composite gradient list
-            for (int X = 0; X < Gradient.Count; X++)
+            double Radius = Math.Sqrt(Math.Pow(Width / 2.0, 2.0) + Math.Pow(Height / 2.0, 2.0));
+            if (Shape == GradientType.Linear || Shape == GradientType.Reflected || Shape == GradientType.Diamond)
             {
-                if (Token.IsCancellationRequested) { return null; }
+                for (int X = 0; X < Gradient.Count; X++)
+                {
+                    if (Token.IsCancellationRequested) { return null; }
 
-                graphics.DrawLine(new Pen(Gradient[X]), X, 0, X, Height - 1);
+                    switch (Shape)
+                    {
+                        case GradientType.Linear:
+                            graphics.DrawLine(new Pen(Gradient[X]), X, 0, X, Height - 1);
+                            break;
+                        //case GradientType.Angle:  //  Required Location Unknown
+                        //    graphics.DrawLine(new Pen(Gradient[X]),
+                        //        Width / 2, Height / 2, Convert.ToSingle(Radius * Math.Cos(X * Math.PI / 180)), Convert.ToSingle(Radius * Math.Sin(X * Math.PI / 180)));
+                        //    break;
+                        case GradientType.Reflected:
+                            graphics.DrawLine(new Pen(Gradient[X]), Convert.ToSingle((Width / 2.0) - X), 0, Convert.ToSingle((Width / 2.0) - X), Height);
+                            graphics.DrawLine(new Pen(Gradient[X]), Convert.ToSingle((Width / 2.0) + X), 0, Convert.ToSingle((Width / 2.0) + X), Height);
+                            break;
+                        case GradientType.Diamond:
+                            graphics.DrawLine(new Pen(Gradient[X]), (Width / 2) - X, Width / 2, Width / 2, (Width / 2) - X);
+                            graphics.DrawLine(new Pen(Gradient[X]), (Width / 2) - X, Width / 2, Width / 2, (Width / 2) + X);
+                            graphics.DrawLine(new Pen(Gradient[X]), (Width / 2) + X, Width / 2, Width / 2, (Width / 2) - X);
+                            graphics.DrawLine(new Pen(Gradient[X]), (Width / 2) + X, Width / 2, Width / 2, (Width / 2) + X);
+                            break;
+                        default:
+                            break;
+                    }
+                }
             }
+            else
+            {
+                for (int X = Gradient.Count - 1; X >= 0; X--)
+                {
+                    if (Token.IsCancellationRequested) { return null; }
+
+                    switch (Shape)
+                    {
+                        case GradientType.Radial:
+                            graphics.FillEllipse(new SolidBrush(Gradient[X]), (Width / 2) - X, (Height / 2) - X, X * 2, X * 2);
+                            break;
+                        //case GradientType.Angle:  //  Required Location Unknown
+                        //    graphics.DrawLine(new Pen(Gradient[X]),
+                        //        Width / 2, Height / 2, Convert.ToSingle(Radius * Math.Cos(X * Math.PI / 180)), Convert.ToSingle(Radius * Math.Sin(X * Math.PI / 180)));
+                        //    break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+
+
 
             //  Save & display the gradient
             graphics.Save();
