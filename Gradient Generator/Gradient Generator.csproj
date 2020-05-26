@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{77801F25-2D31-4386-B2B3-B8BF2FEAFAF3}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Gradient_Maker</RootNamespace>
-    <AssemblyName>Gradient Maker</AssemblyName>
+    <RootNamespace>Gradient_Generator</RootNamespace>
+    <AssemblyName>Gradient Generator</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -61,7 +61,7 @@
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="GradientGenerator.cs" />
+    <Compile Include="GradientGenSystem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomNumGenerator.cs" />
