@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
 
-namespace Gradient_Maker
+namespace GradientGenerator
 {
-    public static class GradientGenerator
+    public static class GradientGenSystem
     {
 
         public enum GradientType { Linear, Radial/*, Angle*/, Reflected, Diamond }
