@@ -14,7 +14,7 @@ Tool for making color gradients
 > Duplicated colors will appear at the end of the list.
 > The type of gradient can be changed via the drop down list.
 
-When you are satisfied with the gradient, make sure the width and height are set to the size you want and click 'Save Gradient'.  If 'Also Save List' is checked, a .color file will be saved with the same name.  This can be loaded for quick setup of previously generated gradients.
+When you are satisfied with the gradient, make sure the width and height are set to the size you want and click 'Save Gradient'.  If 'Also Save List' is checked, a .ColorList file will be saved with the same name.  This can be loaded for quick setup of previously generated gradients.
 
 ### Legal stuff:
 Gradient Generator is provided as-is, free and open source under the MIT license.
