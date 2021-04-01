@@ -28,6 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            "255",
+            "255",
+            "255",
+            "255"}, -1);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.TableMain = new System.Windows.Forms.TableLayoutPanel();
             this.PictPreview = new Cyotek.Windows.Forms.ImageBox();
@@ -50,8 +55,12 @@
             this.BtnAddColor = new System.Windows.Forms.Button();
             this.BtnGenerateGradient = new System.Windows.Forms.Button();
             this.BtnLoad = new System.Windows.Forms.Button();
-            this.ClrManager = new Cyotek.Windows.Forms.ColorEditorManager();
             this.LstGradientType = new System.Windows.Forms.ComboBox();
+            this.ClrManager = new Cyotek.Windows.Forms.ColorEditorManager();
+            this.ColA = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ColR = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ColG = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ColB = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.TableMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumHeight)).BeginInit();
@@ -106,7 +115,7 @@
             this.ClrWheel.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.TableMain.SetColumnSpan(this.ClrWheel, 2);
             this.ClrWheel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ClrWheel.Location = new System.Drawing.Point(292, 61);
+            this.ClrWheel.Location = new System.Drawing.Point(297, 61);
             this.ClrWheel.MinimumSize = new System.Drawing.Size(240, 240);
             this.ClrWheel.Name = "ClrWheel";
             this.ClrWheel.Size = new System.Drawing.Size(245, 240);
@@ -116,7 +125,7 @@
             // 
             this.PictColor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.PictColor.Location = new System.Drawing.Point(437, 3);
+            this.PictColor.Location = new System.Drawing.Point(442, 3);
             this.PictColor.Name = "PictColor";
             this.TableMain.SetRowSpan(this.PictColor, 2);
             this.PictColor.Size = new System.Drawing.Size(100, 52);
@@ -189,10 +198,10 @@
             this.ClrEdit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TableMain.SetColumnSpan(this.ClrEdit, 3);
-            this.ClrEdit.Location = new System.Drawing.Point(543, 61);
+            this.ClrEdit.Location = new System.Drawing.Point(548, 61);
             this.ClrEdit.MinimumSize = new System.Drawing.Size(300, 240);
             this.ClrEdit.Name = "ClrEdit";
-            this.ClrEdit.Size = new System.Drawing.Size(538, 240);
+            this.ClrEdit.Size = new System.Drawing.Size(533, 240);
             this.ClrEdit.TabIndex = 5;
             this.ClrEdit.ColorChanged += new System.EventHandler(this.ClrEdit_ColorChanged);
             // 
@@ -201,7 +210,7 @@
             this.ChkAutoGenerate.AutoSize = true;
             this.ChkAutoGenerate.Checked = true;
             this.ChkAutoGenerate.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ChkAutoGenerate.Location = new System.Drawing.Point(543, 3);
+            this.ChkAutoGenerate.Location = new System.Drawing.Point(548, 3);
             this.ChkAutoGenerate.Name = "ChkAutoGenerate";
             this.ChkAutoGenerate.Size = new System.Drawing.Size(178, 17);
             this.ChkAutoGenerate.TabIndex = 7;
@@ -211,17 +220,26 @@
             // LstColors
             // 
             this.LstColors.AutoArrange = false;
+            this.LstColors.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.ColA,
+            this.ColR,
+            this.ColG,
+            this.ColB});
             this.LstColors.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LstColors.FullRowSelect = true;
+            this.LstColors.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.LstColors.HideSelection = false;
+            this.LstColors.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1});
             this.LstColors.Location = new System.Drawing.Point(3, 3);
             this.LstColors.MinimumSize = new System.Drawing.Size(160, 4);
             this.LstColors.Name = "LstColors";
             this.TableMain.SetRowSpan(this.LstColors, 3);
             this.LstColors.ShowGroups = false;
-            this.LstColors.Size = new System.Drawing.Size(160, 298);
+            this.LstColors.Size = new System.Drawing.Size(165, 298);
             this.LstColors.TabIndex = 6;
             this.LstColors.UseCompatibleStateImageBehavior = false;
-            this.LstColors.View = System.Windows.Forms.View.List;
+            this.LstColors.View = System.Windows.Forms.View.Details;
             this.LstColors.SelectedIndexChanged += new System.EventHandler(this.LstColors_SelectedIndexChanged);
             // 
             // TableButtons
@@ -238,7 +256,7 @@
             this.TableButtons.Controls.Add(this.BtnGenerateGradient, 0, 3);
             this.TableButtons.Controls.Add(this.BtnLoad, 0, 0);
             this.TableButtons.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TableButtons.Location = new System.Drawing.Point(169, 3);
+            this.TableButtons.Location = new System.Drawing.Point(174, 3);
             this.TableButtons.Name = "TableButtons";
             this.TableButtons.RowCount = 9;
             this.TableMain.SetRowSpan(this.TableButtons, 3);
@@ -349,19 +367,38 @@
             this.BtnLoad.UseVisualStyleBackColor = true;
             this.BtnLoad.Click += new System.EventHandler(this.BtnLoad_Click);
             // 
+            // LstGradientType
+            // 
+            this.LstGradientType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.LstGradientType.FormattingEnabled = true;
+            this.LstGradientType.Location = new System.Drawing.Point(297, 3);
+            this.LstGradientType.Name = "LstGradientType";
+            this.LstGradientType.Size = new System.Drawing.Size(121, 21);
+            this.LstGradientType.TabIndex = 11;
+            // 
             // ClrManager
             // 
             this.ClrManager.ColorEditor = this.ClrEdit;
             this.ClrManager.ColorWheel = this.ClrWheel;
             // 
-            // LstGradientType
+            // ColA
             // 
-            this.LstGradientType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.LstGradientType.FormattingEnabled = true;
-            this.LstGradientType.Location = new System.Drawing.Point(292, 3);
-            this.LstGradientType.Name = "LstGradientType";
-            this.LstGradientType.Size = new System.Drawing.Size(121, 21);
-            this.LstGradientType.TabIndex = 11;
+            this.ColA.Text = "A";
+            this.ColA.Width = 40;
+            // 
+            // ColR
+            // 
+            this.ColR.Text = "R";
+            this.ColR.Width = 30;
+            // 
+            // ColG
+            // 
+            this.ColG.Text = "G";
+            this.ColG.Width = 30;
+            // 
+            // ColB
+            // 
+            this.ColB.Text = "B";
             // 
             // FrmMain
             // 
@@ -411,6 +448,10 @@
         private System.Windows.Forms.CheckBox ChkSaveConfig;
         private System.Windows.Forms.Button BtnLoad;
         private System.Windows.Forms.ComboBox LstGradientType;
+        private System.Windows.Forms.ColumnHeader ColA;
+        private System.Windows.Forms.ColumnHeader ColR;
+        private System.Windows.Forms.ColumnHeader ColG;
+        private System.Windows.Forms.ColumnHeader ColB;
     }
 }
 

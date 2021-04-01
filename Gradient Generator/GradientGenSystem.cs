@@ -5,10 +5,16 @@ using System.Threading;
 
 namespace GradientGenerator
 {
+    /// <summary>
+    /// Types of gradients that can be generated.
+    /// </summary>
+    public enum GradientType { Linear, Radial/*, Angle*/, Reflected, Diamond }
+
+    /// <summary>
+    /// Gradient generation methods.
+    /// </summary>
     public static class GradientGenSystem
     {
-
-        public enum GradientType { Linear, Radial/*, Angle*/, Reflected, Diamond }
 
         /// <summary>
         /// Generate a color gradient transitioning from the first color to the second.

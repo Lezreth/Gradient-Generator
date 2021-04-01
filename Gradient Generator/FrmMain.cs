@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using GradientGenerator;
 
 namespace Gradient_Maker
 {
@@ -64,7 +65,7 @@ namespace Gradient_Maker
             ClrEdit_ColorChanged(sender, e);
             LstColors.SmallImageList = ColorList;
 
-            LstGradientType.Items.AddRange(Enum.GetNames(typeof(GradientGenerator.GradientType)));
+            LstGradientType.Items.AddRange(Enum.GetNames(typeof(GradientType)));
             LstGradientType.SelectedIndex = 0;
         }
 
@@ -116,9 +117,9 @@ namespace Gradient_Maker
                 Colors.Add(Color.FromArgb(int.Parse(Codes[0]), int.Parse(Codes[1]), int.Parse(Codes[2]), int.Parse(Codes[3])));
             }
 
-            _ = Enum.TryParse(LstGradientType.Text, out GradientGenerator.GradientType GType);
+            _ = Enum.TryParse(LstGradientType.Text, out GradientType GType);
 
-            Task task = Task.Run(() => GradientGenerator.GradientBitmap(Colors, (int)NumWidth.Value, (int)NumHeight.Value,
+            Task task = Task.Run(() => GradientGenSystem.GradientBitmap(Colors, (int)NumWidth.Value, (int)NumHeight.Value,
                 GType, TokenSource.Token), TokenSource.Token)
                 .ContinueWith((prev) => { if (prev.Result != null) { PictPreview.Image = new Bitmap(prev.Result); } });
             await Task.WhenAll(task);
@@ -221,8 +222,7 @@ namespace Gradient_Maker
             ColorList.Images.Add(ID, new Bitmap(GetThumbnail(NColor, 32, 32)));
 
             //  Create a list item and add it to the list along with the ID of the new icon
-            string ColorText = NColor.A + "," + NColor.R + "," + NColor.G + "," + NColor.B;
-            _ = LstColors.Items.Add(ColorText, ID);
+            _ = LstColors.Items.Add(new ListViewItem(new string[] { NColor.A.ToString(), NColor.R.ToString(), NColor.G.ToString(), NColor.B.ToString() }, ID));
 
             //  If we have at least 2 colors in the list, generate a gradient
             if (LstColors.Items.Count > 1 && ChkAutoGenerate.Checked)
