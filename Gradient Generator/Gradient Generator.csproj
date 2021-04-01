@@ -58,11 +58,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CAnchor.cs" />
     <Compile Include="FrmMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GradientBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GradientBar.Designer.cs">
+      <DependentUpon>GradientBar.cs</DependentUpon>
     </Compile>
     <Compile Include="GradientGenSystem.cs" />
     <Compile Include="Program.cs" />
@@ -70,6 +77,9 @@
     <Compile Include="RandomNumGenerator.cs" />
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GradientBar.resx">
+      <DependentUpon>GradientBar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

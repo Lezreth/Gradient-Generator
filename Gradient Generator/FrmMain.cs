@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using GradientGenerator;
+using Gradient_Generator;
 
 namespace Gradient_Maker
 {
@@ -110,11 +110,11 @@ namespace Gradient_Maker
             if (LstColors.Items.Count < 2) { return; }
 
             //  Create a color from each item in the list
-            List<Color> Colors = new List<Color>();
+            List<CAnchor> Colors = new List<CAnchor>();
             foreach (ListViewItem item in LstColors.Items)
             {
-                string[] Codes = item.Text.Split(',');
-                Colors.Add(Color.FromArgb(int.Parse(Codes[0]), int.Parse(Codes[1]), int.Parse(Codes[2]), int.Parse(Codes[3])));
+                Colors.Add(new CAnchor(Color.FromArgb(int.Parse(item.Text), int.Parse(item.SubItems[0].Text), int.Parse(item.SubItems[1].Text), int.Parse(item.SubItems[2].Text)),
+                    int.Parse(item.SubItems[3].Text)));
             }
 
             _ = Enum.TryParse(LstGradientType.Text, out GradientType GType);
@@ -224,9 +224,8 @@ namespace Gradient_Maker
             //  Create a list item and add it to the list along with the ID of the new icon
             _ = LstColors.Items.Add(new ListViewItem(new string[] { NColor.A.ToString(), NColor.R.ToString(), NColor.G.ToString(), NColor.B.ToString() }, ID));
 
-            //  If we have at least 2 colors in the list, generate a gradient
-            if (LstColors.Items.Count > 1 && ChkAutoGenerate.Checked)
-            { GetGradient(); }
+            //  Generate a gradient
+            GetGradient();
         }
 
         #endregion
@@ -253,9 +252,8 @@ namespace Gradient_Maker
                     LstColors.Items.RemoveAt(LstColors.SelectedItems[0].Index);
                 }
 
-                //  If we have at least 2 colors in the list, generate a gradient
-                if (LstColors.Items.Count > 1 && ChkAutoGenerate.Checked)
-                { GetGradient(); }
+                //  Generate a gradient
+                GetGradient();
             }
         }
 
@@ -299,18 +297,16 @@ namespace Gradient_Maker
         {
             MoveListViewItems(LstColors, MoveDirection.Up);
 
-            //  If we have at least 2 colors in the list, generate a gradient
-            if (LstColors.Items.Count > 1 && ChkAutoGenerate.Checked)
-            { GetGradient(); }
+            //  Generate a gradient
+            GetGradient();
         }
 
         private void BtnMoveDown_Click(object sender, EventArgs e)
         {
             MoveListViewItems(LstColors, MoveDirection.Down);
 
-            //  If we have at least 2 colors in the list, generate a gradient
-            if (LstColors.Items.Count > 1 && ChkAutoGenerate.Checked)
-            { GetGradient(); }
+            //  Generate a gradient
+            GetGradient();
         }
 
         private void BtnDuplicate_Click(object sender, EventArgs e)
@@ -318,9 +314,8 @@ namespace Gradient_Maker
             foreach (ListViewItem item in LstColors.SelectedItems)
             { _ = LstColors.Items.Add((ListViewItem)item.Clone()); }
 
-            //  If we have at least 2 colors in the list, generate a gradient
-            if (LstColors.Items.Count > 1 && ChkAutoGenerate.Checked)
-            { GetGradient(); }
+            //  Generate a gradient
+            GetGradient();
         }
 
         private void LstColors_SelectedIndexChanged(object sender, EventArgs e)
